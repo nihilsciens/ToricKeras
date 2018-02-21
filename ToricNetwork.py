@@ -44,8 +44,8 @@ for i in range(size_y):
 #########
 # Define model
 model = Sequential()
-model.add(Conv2D(15, kernel_size=[3, 3], input_shape=[width, height, 1], strides=[1, 1], padding='valid', activation='sigmoid'))
-model.add(AveragePooling2D(pool_size=(2, 2), strides=2, padding='valid'))
+model.add(Conv2D(15, kernel_size=[3,3], input_shape=[width,height,1], strides=[1,1], padding='valid', activation='sigmoid'))
+model.add(AveragePooling2D(pool_size=(2,2), strides=2, padding='valid'))
 model.add(Flatten())
 model.add(Dense(N, activation='sigmoid'))
 model.add(Dense(4, activation='sigmoid'))
