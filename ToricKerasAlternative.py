@@ -67,6 +67,7 @@ for j in range(length):
 model = Sequential()
 model.add(Conv2D(border, kernel_size=[length, 1], input_shape=[2, length, length], strides=1, padding='valid', activation='relu', data_format='channels_first'))
 #model.add(AveragePooling2D(pool_size=(2, 2), strides=2, padding='valid'))
+model.add(Dense(border, activation='sigmoid'))
 model.add(Flatten())
 model.add(Dense(border, activation='sigmoid'))
 model.add(Dense(4, activation='softmax'))
