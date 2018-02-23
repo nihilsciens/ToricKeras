@@ -46,7 +46,7 @@ for j in range(width):
 #########
 # Define model
 model = Sequential()
-model.add(Conv2D(15, kernel_size=[2, 3], input_shape=[width, height, 1], strides=[1, 2], padding='valid', activation='relu'))
+model.add(Conv2D(15, kernel_size=[2, 3], input_shape=[1, width, height], strides=[1, 2], padding='valid', activation='relu'))
 model.add(AveragePooling2D(pool_size=(2, 2), strides=2, padding='valid'))
 model.add(Flatten())
 model.add(Dense(N, activation='sigmoid'))
