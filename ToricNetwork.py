@@ -7,6 +7,8 @@ from keras.layers import Dense
 from keras.layers import Flatten
 from keras.layers import MaxPooling2D
 from keras.layers import AveragePooling2D
+from keras.callbacks import TensorBoard, Callback, ModelCheckpoint
+
 import math
 import numpy
 
@@ -41,13 +43,16 @@ for j in range(width):
     for i in range(size_yt):
         X_it[i,0,j,:] = Xt[i,j*height:(j+1)*height]
 
+#numpy.swapaxes(X_i,2,3)
+#numpy.swapaxes(X_it,2,3)
+
 #########
 # MODEL #
 #########
 # Define model
 model = Sequential()
-model.add(Conv2D(15, kernel_size=[2, 3], input_shape=[1, width, height], strides=[1, 2], padding='valid', activation='relu'))
-model.add(AveragePooling2D(pool_size=(2, 2), strides=2, padding='valid'))
+model.add(Conv2D(15, kernel_size=[2, 3], input_shape=[1, width, height], strides=[1, 2], padding='valid', activation='relu', data_format='channels_first'))
+#model.add(AveragePooling2D(pool_size=(2, 2), strides=2, padding='valid'))
 model.add(Flatten())
 model.add(Dense(N, activation='sigmoid'))
 model.add(Dense(4, activation='softmax'))
@@ -58,7 +63,8 @@ model.compile(loss='categorical_crossentropy', optimizer='adam', metrics=['accur
 # BACKPROPAGATION #
 ###################
 # Fit the model
-model.fit(X_i, Y, epochs=1000, batch_size=1000)
+cb = TensorBoard()
+model.fit(X_i, Y, epochs=100, batch_size=100, verbose=1, callbacks=[cb])
 
 ##############
 # EVALUATION #
